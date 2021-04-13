@@ -1,0 +1,49 @@
+<html>
+
+<head>
+   <title>Hello world</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<!-- <script src = "https://ws.consiliumdev.com/socket.io/socket.io.js"></script>
+    -->
+<script>
+   var socket = io("http://localhost:3002?query=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbGVzcmVwNCIsImlhdCI6MTU5NjYwMzU4MywiZXhwIjoxNTk2Njg5OTgzfQ.bnQ4P48yuNK61t8Ago2WR05QXcyiJFsju-odqoYhraY",
+      {
+         transports: ['websocket']
+      });
+   
+   
+      //var socket = io("https://e7fb2f6c8280.ngrok.io?query=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbGVzcmVwNCIsImlhdCI6MTU5NTc2MTY2MywiZXhwIjoxNTk1ODQ4MDYzfQ.f0XIYPvxKDG4sSzNPriG0Psfzbpey8Uwo4Qm_8OIpQY");
+   //https://stackoverflow.com/questions/24058157/socket-io-node-js-cross-origin-request-blocked
+   
+   
+   //  var socket = io("https://ws.consiliumdev.com?query=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbGVzcmVwNCIsImlhdCI6MTU5NjIxNDYzMCwiZXhwIjoxNTk2MzAxMDMwfQ.C2mwD0xgElU1U_uQiKf8Z5qG5K-mprccMkoN0ke3SOw",
+   //    {
+   //       transports: ['websocket']
+   //    });
+   socket.on('message', message => {
+      console.log(message)
+   });
+
+   socket.on('newChatReceived', message => {
+      console.log(message)
+   });
+   socket.on('newGroupChatReceived', message => {
+      console.log(message)
+   });
+   socket.on('newChatSent', message => {
+      console.log(message)
+   });
+
+   socket.on('newThreadCreated', message => {
+      console.log(message)
+   });
+
+   socket.on('threadUpdated', message => {
+      console.log(message)
+   });
+</script>
+
+<body>Hello world</body>
+
+</html>
