@@ -1,30 +1,26 @@
 const dbModel = require("../dbModel/table/commonQueries");
 const jwtHelper = require('../Util/jwtHelper');
 
-const authenticateUser = async (username, password) => {
+const authenticateUser = async (body) => {
     let obj = null;
+    let { username, password } = body
     const model = new dbModel();
-    var user = await model.authenticate(username, password);
+    var user = await model.authenticate(username, password); console.log(user)
     if (user) {
         delete user.password;
-        //get user org:
-        let org = await model.getOrg(user.orgId)
 
-        if (org) {
-            //generate token
-            let tokenObj = {
-                username,
-            }
+        //generate token
+        let tokenObj = {
+            username,
+        }
 
-            let token = await jwtHelper.getToken(tokenObj);
-            var session = await model.addSession(username, token);
-            if (session) {
-                obj = {
-                    token,
-                    user,
-                    org
-                };
-            }
+        let token = await jwtHelper.getToken(tokenObj);
+        var session = await model.addSession(username, token);
+        if (session) {
+            obj = {
+                token,
+                user
+            };
         }
     }
 
@@ -78,7 +74,8 @@ const logout = async (headers) => {
     const token_string = headers.authorization.split("Bearer ")[1];
     const model = new dbModel();
 
-    const resp = await model.invalidateUserSession(token_string);
+    const resp = await model.removeUserSession(token_string);
+    
     if(resp){
         return {};
     }else{

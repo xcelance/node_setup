@@ -13,8 +13,7 @@ const userController = require('../../controller/userController.js');
 
 
 router.post("/login", async (req, res) => {
-    const { token } = req.body;
-    const result = await accountController.authenticateUser(token);
+    const result = await accountController.authenticateUser(req.body);
     const response = new baseResponse(res);
 
     if (!result) {
@@ -58,12 +57,10 @@ router.get("/logout", middleware.authenticate, async (req, res) => {
     const response = new baseResponse(res);
 
     if (!result) {
-
         response.sendResponse(null, false, "", statusCode.Unauthorized, null);
-
-    }
-    else
+    } else {
         response.sendResponse(result, true, "", statusCode.OK, null);
+    }
 });
 
 router.get("/info", middleware.authenticate, async (req, res) => {

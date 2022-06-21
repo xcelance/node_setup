@@ -8,12 +8,12 @@ class CommonQueries extends model {
     super("tUsers");
   }
 
-  async authenticate(username, password) {
+  async authenticate(username, password) { 
     let q = `SELECT * FROM tUsers WHERE username = ? and password = md5(?);`;
 
     try {
-      const result = await super.executeSql(q, [username, password]);
-      return result && result[0] && result[0][0] ? result[0][0] : null;
+      const result = await super.executeSql(q, [username, password]); console.log(result)
+      return result && result[0] ? result[0] : null;
     } catch (ex) {
       console.log(ex);
       throw ex;
@@ -24,7 +24,7 @@ class CommonQueries extends model {
     let sql = `SELECT * FROM tUsers WHERE username = ?;`;
     try {
       const result = await super.executeSql(sql, [username]);
-      return result && result[0] && result[0][0] ? result[0][0] : null;
+      return result && result[0] ? result[0] : null; console.log(result)
     } catch (ex) {
       console.log(ex);
       throw ex;

@@ -12,7 +12,7 @@ const restrictedColumns = [
 
 const getFirstRow = (result) => {
 
-    return result && result[0] && result[0][0] ? result[0][0] : null;
+    return result && result[0] ? result[0] : null;
 
 }
 
@@ -34,7 +34,7 @@ async function executeAndCheckRowAffected(base, q, params = []) {
 
 async function executeAndGetFirstRow(base, q, params = []) {
     const result = await base.executeSql(q, params);
-    return result && result[0] && result[0][0] ? result[0][0] : null;
+    return result && result[0] ? result[0] : null;
 }
 
 async function executeAndGetRows(base, q) {

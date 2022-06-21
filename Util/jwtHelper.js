@@ -14,7 +14,13 @@ const isValid = async (token) => {
     }
 }
 
+const destroy = async (token) => {
+	jwt.destroy(token);
+	return true;
+}
+
 module.exports = {
     getToken,
-    isValid
+    isValid,
+    destroy
 }
